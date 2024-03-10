@@ -1,5 +1,6 @@
 package com.example.firstactivity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,8 +14,10 @@ class FirstActivity : ComponentActivity() {
         setContentView(R.layout.first_layout)
         val btn: Button = findViewById(R.id.button1)
         btn.setOnClickListener {
-            Toast.makeText(this, "btn1 pressed", Toast.LENGTH_SHORT).show()
-            finish()
+//            Toast.makeText(this, "btn1 pressed", Toast.LENGTH_SHORT).show()
+//            finish()
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
         }
     }
 
