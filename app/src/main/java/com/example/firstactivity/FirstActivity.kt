@@ -1,7 +1,9 @@
 package com.example.firstactivity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -14,10 +16,22 @@ class FirstActivity : ComponentActivity() {
         setContentView(R.layout.first_layout)
         val btn: Button = findViewById(R.id.button1)
         btn.setOnClickListener {
-//            Toast.makeText(this, "btn1 pressed", Toast.LENGTH_SHORT).show()
-//            finish()
-            val intent = Intent(this, SecondActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent("com.example.firstactivity.ACTION_START")
+//            intent.addCategory("com.example.firstactivity.MY_CATEGORY")
+//            val intent = Intent(Intent.ACTION_DIAL)
+//            intent.data = Uri.parse("tel:10086")
+            var intent = Intent(this, SecondActivity::class.java)
+            startActivityForResult(intent, 1)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
+            1 -> if(resultCode == RESULT_OK) {
+                val rt =  data?.getStringExtra("return_data");
+                Log.i(this.javaClass.name, rt ?: "NULL")
+            }
         }
     }
 
